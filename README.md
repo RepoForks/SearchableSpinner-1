@@ -65,10 +65,10 @@ Step 3. Inside JAVA
     
 Step 4. Add custom style in your styles.xml
 
-	<style name="DialogAnimations" />
-    	<style name="DialogAnimations.SmileWindow">
-        <item name="@android:windowEnterAnimation">@anim/slide_in_bottom</item>
-        <item name="@android:windowExitAnimation">@anim/slide_out_top</item>
+	<style title="DialogAnimations" />
+    	<style title="DialogAnimations.SmileWindow">
+        <item title="@android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item title="@android:windowExitAnimation">@anim/slide_out_top</item>
     	</style>
 
   

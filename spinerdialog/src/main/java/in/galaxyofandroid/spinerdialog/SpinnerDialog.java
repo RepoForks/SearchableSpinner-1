@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 
 public class SpinnerDialog {
-    ArrayList<String> items;
+    ArrayList<IdentifiableObject> items;
     Activity context;
     String dTitle;
     OnSpinerItemClick onSpinerItemClick;
@@ -29,13 +29,13 @@ public class SpinnerDialog {
 
 
 
-    public SpinnerDialog(Activity activity,ArrayList<String> items,String dialogTitle) {
+    public SpinnerDialog(Activity activity,ArrayList<IdentifiableObject> items,String dialogTitle) {
         this.items = items;
         this.context = activity;
         this.dTitle=dialogTitle;
     }
 
-    public SpinnerDialog(Activity activity,ArrayList<String> items,String dialogTitle,int style) {
+    public SpinnerDialog(Activity activity,ArrayList<IdentifiableObject> items,String dialogTitle,int style) {
         this.items = items;
         this.context = activity;
         this.dTitle=dialogTitle;
@@ -54,7 +54,7 @@ public class SpinnerDialog {
         title.setText(dTitle);
         final ListView listView = (ListView) v.findViewById(R.id.list);
         final EditText searchBox = (EditText) v.findViewById(R.id.searchBox);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.items_view, items);
+        final IdentifierObjAdapter adapter = new IdentifierObjAdapter(context, items);
         listView.setAdapter(adapter);
         adb.setView(v);
         alertDialog = adb.create();
@@ -103,5 +103,8 @@ public class SpinnerDialog {
         });
         alertDialog.show();
     }
+
+
+
 
 }

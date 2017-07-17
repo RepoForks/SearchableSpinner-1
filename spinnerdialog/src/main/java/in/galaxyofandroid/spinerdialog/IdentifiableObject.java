@@ -2,14 +2,20 @@ package in.galaxyofandroid.spinerdialog;
 
 import android.support.annotation.DrawableRes;
 
+import org.json.JSONObject;
+
 /**
  * Created by abdulmujibaliu on 7/16/17.
  */
 
 public class IdentifiableObject {
-    private String title, subtitle;
-    private int identifier;
-    private int recourseId = 0;
+    protected String title, subtitle;
+    protected int identifier;
+    protected int recourseId = 0;
+
+    public IdentifiableObject(){
+
+    }
 
     public IdentifiableObject(String title, String subTitle, int identifier, @DrawableRes int recourseId) {
         this.title = title;

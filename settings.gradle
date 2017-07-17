@@ -1,1 +1,2 @@
-include ':app', ':spinerdialog'
+include ':app', ':spinnerdialoglib'
+project(':spinnerdialoglib').projectDir = new File('spinnerdialog')

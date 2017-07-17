@@ -1,5 +1,5 @@
 # SearchableSpinner
-Fully Searchable Spiner Dialog: This is just one thing I did so I could blow through a project at my PPA. Meh 🤷🏿‍♂🤷🏿‍♂🤷🏿‍♂🤷🏿‍♂
+Fully Searchable Spiner Dialog: This is just one library I forked and modified a lot so I could blow through a project at my PPA. Meh 🤷🏿‍♂🤷🏿‍♂🤷🏿‍♂🤷🏿‍♂
 
 <img src="Screens/SCREEN1.png" width="250" />
 <img src="Screens/SCREEN2.png" width="250" />
@@ -7,7 +7,7 @@ Fully Searchable Spiner Dialog: This is just one thing I did so I could blow thr
 
 Step 1. Initialize your custom object and extend IdentifiableObject
 
-Step 2. Initialize your custom object and extend IdentifiableObject
+Step 2. Setup dialog like below
 
     public class MainActivity extends AppCompatActivity {
     ArrayList<String> items=new ArrayList<>();

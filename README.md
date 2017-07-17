@@ -1,24 +1,13 @@
 # SearchableSpinner
-Fully Searchable Spiner Dialog
+Fully Searchable Spiner Dialog: This is just one thing I did so I could blow through a project at my PPA. Meh 🤷🏿‍♂🤷🏿‍♂🤷🏿‍♂🤷🏿‍♂
 
-![Screen Shot](https://cloud.githubusercontent.com/assets/18304656/23259376/d470d6aa-f9f2-11e6-98f1-679f1e32af8f.gif)
+<img src="Screens/SCREEN1.png" width="250" />
+<img src="Screens/SCREEN2.png" width="250" />
 
 
-Step 1. Add the JitPack repository to your build file
+Step 1. Initialize your custom object and extend IdentifiableObject
 
-	allprojects {
-		repositories {
-			maven { url 'https://jitpack.io' }
-		}
-	}
-  
-Step 2. Add the dependency
-
-	dependencies {
-	        compile 'com.github.MdFarhanRaja:SearchableSpinner:1.2'
-	}
-  
-Step 3. Inside JAVA
+Step 2. Initialize your custom object and extend IdentifiableObject
 
     public class MainActivity extends AppCompatActivity {
     ArrayList<String> items=new ArrayList<>();
@@ -29,24 +18,24 @@ Step 3. Inside JAVA
         setContentView(R.layout.activity_main);
         final TextView selectedItems=(TextView)findViewById(R.id.txt);
 
-        items.add("Mumbai");
-        items.add("Delhi");
-        items.add("Bengaluru");
-        items.add("Hyderabad");
-        items.add("Ahmedabad");
-        items.add("Chennai");
-        items.add("Kolkata");
-        items.add("Surat");
-        items.add("Pune");
-        items.add("Jaipur");
-        items.add("Lucknow");
-        items.add("Kanpur");
+				 items.add(new IdentifiableObject("Mumbai", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Delhi", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Bengaluru", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Hyderabad", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Ahmedabad", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Chennai", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Kolkata", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Surat", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Pune", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Jaipur", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Lucknow", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
+         items.add(new IdentifiableObject("Kanpur", "India", 0, R.drawable.ic_checkbox_marked_circle_outline_white_18dp));
 
 
         spinnerDialog=new SpinnerDialog(MainActivity.this,items,"Select or Search City");// With No Animation
-	spinnerDialog=new SpinnerDialog(MainActivity.this,items,"Select or Search City",R.style.DialogAnimations_SmileWindow);// With 	Animation
-	
-	
+	      spinnerDialog=new SpinnerDialog(MainActivity.this,items,"Select or Search City",R.style.DialogAnimations_SmileWindow);// With 	Animation
+
+
         spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
@@ -62,7 +51,7 @@ Step 3. Inside JAVA
         });
     }
     }
-    
+
 Step 4. Add custom style in your styles.xml
 
 	<style title="DialogAnimations" />
@@ -70,5 +59,3 @@ Step 4. Add custom style in your styles.xml
         <item title="@android:windowEnterAnimation">@anim/slide_in_bottom</item>
         <item title="@android:windowExitAnimation">@anim/slide_out_top</item>
     	</style>
-
-  

@@ -3,6 +3,7 @@ package in.galaxyofandroid.spinerdialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +24,22 @@ import java.util.List;
 public class IdentifierObjAdapter extends ArrayAdapter<IdentifiableObject> {
     private final Context context;
     private List<IdentifiableObject> values;
+    private AlertDialog alertDialog;
+    private OnSpinerItemClick spinerItemClick;
     private String TAG = getClass().getSimpleName();
     private List<IdentifiableObject> orig;
 
-    public IdentifierObjAdapter(Context context, List<IdentifiableObject> values) {
+    public IdentifierObjAdapter(Context context, List<IdentifiableObject> values, AlertDialog alertDialog, OnSpinerItemClick spinerItemClick) {
         super(context, -1, values);
         this.context = context;
         this.values = values;
+        this.alertDialog = alertDialog;
+        this.spinerItemClick = spinerItemClick;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.items_view, parent, false);
@@ -43,14 +48,21 @@ public class IdentifierObjAdapter extends ArrayAdapter<IdentifiableObject> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.right_icon);
 
         textView.setText(values.get(position).getTitle());
-        textView2.setText(values.get(position).getTitle());
+        textView2.setText(values.get(position).getSubtitle());
 
         // change the icon for Windows and iPhone
         if (values.get(position).getRecourseId()>0) {
-            //imageView.setImageResource(values.get(position).getRecourseId());
+            imageView.setImageResource(values.get(position).getRecourseId());
         } else {
             imageView.setVisibility(View.INVISIBLE);
         }
+
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinerItemClick.onClick(values.get(position), position);
+            }
+        });
 
         return rowView;
     }

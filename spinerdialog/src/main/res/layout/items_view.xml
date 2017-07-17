@@ -34,6 +34,7 @@
 
     <ImageView
         android:layout_width="20dp"
+        android:tint="#CCCACB"
         android:id="@+id/right_icon"
         android:src="@drawable/ic_search_black_36dp"
         android:layout_height="20dp" />

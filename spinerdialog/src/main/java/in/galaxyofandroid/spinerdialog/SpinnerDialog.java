@@ -1,14 +1,13 @@
 package in.galaxyofandroid.spinerdialog;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
+import android.support.annotation.DrawableRes;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,24 +21,29 @@ public class SpinnerDialog {
     ArrayList<IdentifiableObject> items;
     Activity context;
     String dTitle;
+    private int dialogImageRes;
+    private int titleImageRes;
     OnSpinerItemClick onSpinerItemClick;
     AlertDialog alertDialog;
     int pos;
     int style;
 
 
-
-    public SpinnerDialog(Activity activity,ArrayList<IdentifiableObject> items,String dialogTitle) {
+    public SpinnerDialog(Activity activity, ArrayList<IdentifiableObject> items, String dialogTitle, @DrawableRes int dialogImageRes, @DrawableRes int titleImageRes) {
         this.items = items;
         this.context = activity;
-        this.dTitle=dialogTitle;
+        this.dTitle = dialogTitle;
+        this.dialogImageRes = dialogImageRes;
+        this.titleImageRes = titleImageRes;
     }
 
-    public SpinnerDialog(Activity activity,ArrayList<IdentifiableObject> items,String dialogTitle,int style) {
+    public SpinnerDialog(Activity activity, ArrayList<IdentifiableObject> items, String dialogTitle, int style, @DrawableRes int dialogImageRes, @DrawableRes int titleImageRes) {
         this.items = items;
         this.context = activity;
-        this.dTitle=dialogTitle;
-        this.style=style;
+        this.dTitle = dialogTitle;
+        this.style = style;
+        this.dialogImageRes = dialogImageRes;
+        this.titleImageRes = titleImageRes;
     }
 
     public void bindOnSpinerListener(OnSpinerItemClick onSpinerItemClick1) {
@@ -51,32 +55,27 @@ public class SpinnerDialog {
         View v = context.getLayoutInflater().inflate(R.layout.dialog_layout, null);
         TextView rippleViewClose = (TextView) v.findViewById(R.id.close);
         TextView title = (TextView) v.findViewById(R.id.spinerTitle);
+        ImageView titleImage = (ImageView) v.findViewById(R.id.title_image);
+        ImageView dialogImage = (ImageView) v.findViewById(R.id.dialog_image);
+
+        titleImage.setImageResource(titleImageRes);
+        dialogImage.setImageResource(dialogImageRes);
+
         title.setText(dTitle);
         final ListView listView = (ListView) v.findViewById(R.id.list);
         final EditText searchBox = (EditText) v.findViewById(R.id.searchBox);
-        final IdentifierObjAdapter adapter = new IdentifierObjAdapter(context, items);
+        final IdentifierObjAdapter adapter = new IdentifierObjAdapter(context, items, alertDialog, new OnSpinerItemClick() {
+            @Override
+            public void onClick(IdentifiableObject item, int position) {
+                onSpinerItemClick.onClick(item, position);
+                alertDialog.dismiss();
+            }
+        });
         listView.setAdapter(adapter);
         adb.setView(v);
         alertDialog = adb.create();
         alertDialog.getWindow().getAttributes().windowAnimations = style;//R.style.DialogAnimations_SmileWindow;
         alertDialog.setCancelable(false);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                TextView t=(TextView)view.findViewById(R.id.text1);
-                for(int j=0;j<items.size();j++)
-                {
-                    if(t.getText().toString().equalsIgnoreCase(items.get(j).toString()))
-                    {
-                        pos=j;
-                    }
-                }
-                onSpinerItemClick.onClick(t.getText().toString(),pos);
-                alertDialog.dismiss();
-            }
-        });
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -103,8 +102,6 @@ public class SpinnerDialog {
         });
         alertDialog.show();
     }
-
-
 
 
 }

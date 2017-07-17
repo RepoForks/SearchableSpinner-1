@@ -1,5 +1,7 @@
 package in.galaxyofandroid.spinerdialog;
 
+import android.support.annotation.DrawableRes;
+
 /**
  * Created by abdulmujibaliu on 7/16/17.
  */
@@ -9,11 +11,15 @@ public class IdentifiableObject {
     private int identifier;
     private int recourseId = 0;
 
-    public IdentifiableObject(String title, String subTitle, int identifier, int recourseId) {
+    public IdentifiableObject(String title, String subTitle, int identifier, @DrawableRes int recourseId) {
         this.title = title;
         this.subtitle = subTitle;
         this.identifier = identifier;
         this.recourseId = recourseId;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
     }
 
     public String getTitle() {

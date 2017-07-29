@@ -8,35 +8,14 @@ import org.json.JSONObject;
  * Created by abdulmujibaliu on 7/16/17.
  */
 
-public class IdentifiableObject {
-    protected String title, subtitle;
-    protected int identifier;
-    protected int recourseId = 0;
+public interface IdentifiableObject {
 
-    public IdentifiableObject(){
 
-    }
+    public String getSubtitle();
 
-    public IdentifiableObject(String title, String subTitle, int identifier, @DrawableRes int recourseId) {
-        this.title = title;
-        this.subtitle = subTitle;
-        this.identifier = identifier;
-        this.recourseId = recourseId;
-    }
+    public String getTitle();
 
-    public String getSubtitle() {
-        return subtitle;
-    }
+    public int getIdentifier();
 
-    public String getTitle() {
-        return title;
-    }
-
-    public int getIdentifier() {
-        return identifier;
-    }
-
-    public int getRecourseId() {
-        return recourseId;
-    }
+    public int getRecourseId();
 }
